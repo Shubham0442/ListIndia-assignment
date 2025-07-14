@@ -28,6 +28,35 @@
   color: #61dafb;
 }
 
+:root {
+  --body-bg: #fff;
+  --primary: #3d54ff;
+  --heading-text: #0b3558;
+  --para: #476788;
+  --para-light: rgba(71, 103, 136, 0.7);
+  --icon-button-hover-bg: rgba(219, 223, 233, 1);
+  --white: #ffffff;
+  --disabled-button-bg: rgba(139, 61, 255, 0.2);
+  --disabled-secondary-button-bg: #c5c5c5;
+  --close-button-bg: rgba(128, 128, 128, 0.1);
+  --disabled-secondary-button-text: #ffffff;
+  --all_div_border: #cccccc;
+  --all_div_border2: rgb(175, 175, 175);
+  --all_input_border: #cdcdcd;
+  --button-fields-bg: rgba(255, 255, 255, 1);
+  --add-candiates-card-left-right-box-bg: #f8f8f8;
+  --add-candidates-file-name-box-bg: #fff;
+  --status-filter-bar-scroll-button-bg: #f4f5f6;
+  --active-kanban-filter-bg: #eceded;
+  --skill-card-bg: rgba(71, 103, 136, 0.08);
+  --heading_text: #0b3558;
+  --stylish_div: #ecf5ff;
+  --stylish_div_p: #476788;
+  --solution_bg: #ffffff;
+  --hover-bg: rgba(139, 61, 255, 0.2);
+  --border: rgba(241, 241, 244, 1);
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
