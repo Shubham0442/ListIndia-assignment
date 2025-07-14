@@ -9,6 +9,21 @@ userController.post("/register", async (req, res) => {
   try {
     const { firstname, lastname, email, password, mobile } = req.body;
 
+    if (
+      !firstname ||
+      firstname === "" ||
+      !lastname ||
+      lastname === "" ||
+      !email ||
+      email === "" ||
+      !password ||
+      password === "" ||
+      !mobile ||
+      mobile === ""
+    ) {
+      res.status(400).send({ msg: "Please fill all the fields correctly" });
+    }
+
     const user = await User.find({ email: email });
 
     if (user && user?.length !== 0)
@@ -80,3 +95,5 @@ userController.post("/login", async (req, res) => {
     res.status(401).send({ error: "Invalid email or password" });
   }
 });
+
+module.exports = { userController };
