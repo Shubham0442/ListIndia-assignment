@@ -1,7 +1,7 @@
 import "./App.css";
 import AllRoutes from "./AllRoutes";
-import Navbar from "./Components/Navbar";
 import { ToastContainer } from "react-toastify";
+import { Footer, Navbar } from "./Components";
 
 function App() {
   return (
@@ -9,6 +9,7 @@ function App() {
       <ToastContainer />
       <Navbar />
       <AllRoutes />
+      <Footer />
     </div>
   );
 }

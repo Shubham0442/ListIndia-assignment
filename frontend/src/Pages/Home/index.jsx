@@ -1,46 +1,58 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllBusinesses } from "../../redux/actions/businessAction";
-import { InputField, PageHeading } from "../../Components";
+import {
+  BusinessCard,
+  Loader,
+  NoData,
+  PageHeading,
+  SearchDropdown
+} from "../../Components";
 
 const Home = () => {
-  const [searchTerm, setSearchTerm] = useState("");
   const [selectedBusiness, setSelectedBusiness] = useState("");
-  const [openDropdown, setOpenDropdown] = useState(false);
   const dispatch = useDispatch();
   const { isLoading, allBusinesses } = useSelector(
     (state) => state?.businessReducer
   );
 
-  console.log(isLoading, allBusinesses);
+  console.log("isLoading", isLoading, "allBusinesses", allBusinesses);
 
   const getAllBusinessesData = () => {
     dispatch(getAllBusinesses(selectedBusiness));
   };
 
-  const handleSearch = (e) => {
-    setSearchTerm(e.target.value);
-  };
-
   useEffect(() => {
-    getAllBusinessesData();
-  }, []);
+    getAllBusinessesData(selectedBusiness);
+  }, [selectedBusiness]);
 
   return (
-    <div className="w-full h-auto m-auto px-4">
+    <div className="w-full h-auto pb-5">
       <PageHeading heading="Welcome to Business World!" />
       <div className="w-full h-auto flex items-center justify-center">
-        <div className="w-[300px]">
-          <InputField
-            value={searchTerm}
-            height="35px"
-            placeholder="Search by business name, category, location"
-            onChange={handleSearch}
-          />
-          {openDropdown && (
-            <div className="w-[300px] h-[300px] overflow-y-auto border border-[var(--border)]"></div>
-          )}
-        </div>
+        <SearchDropdown setSelectedBusiness={setSelectedBusiness} />
+      </div>
+      <div className="w-full h-auto mt-5">
+        {isLoading ? (
+          <div className="w-full h-[400px] flex items-center justify-center">
+            <Loader />
+          </div>
+        ) : !isLoading && allBusinesses?.length !== 0 ? (
+          <div className="w-full h-auto flex items-center justify-center gap-4 flex-wrap">
+            {allBusinesses?.map((business) => (
+              <div
+                className="lg:w-[23%] md:w-[40%] sm:w-[90%] sx:w-[95%]"
+                key={business?._id}
+              >
+                <BusinessCard business={business} />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="w-full h-[400px] flex items-center justify-center">
+            <NoData />
+          </div>
+        )}
       </div>
     </div>
   );

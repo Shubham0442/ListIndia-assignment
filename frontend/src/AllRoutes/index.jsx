@@ -1,8 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { Home } from "../Pages";
-import Login from "../Pages/Login";
-import Register from "../Pages/Register";
-import NewBusiness from "../Pages/NewBusiness";
+import { Home, Login, NewBusiness, Register } from "../Pages";
 import PrivateRoute from "../HOC/PrivateRoute";
 
 const AllRoutes = () => {

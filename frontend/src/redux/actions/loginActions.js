@@ -2,11 +2,12 @@ import axios from "axios";
 const {
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
-  USER_LOGIN_FAILURE
+  USER_LOGIN_FAILURE,
+  USER_LOGOUT
 } = require("../actionTypes/loginActionsTypes");
 
 const login = (loginData) => async (dispatch) => {
-  console.log("from login func");
+  // console.log("from login func");
   dispatch({ type: USER_LOGIN_REQUEST });
   try {
     const data = await axios({
@@ -24,4 +25,9 @@ const login = (loginData) => async (dispatch) => {
   }
 };
 
-export { login };
+const handlelogout = () => (dispatch) => {
+  localStorage?.removeItem("user_token");
+  dispatch({ type: USER_LOGOUT });
+};
+
+export { login, handlelogout };

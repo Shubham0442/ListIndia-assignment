@@ -1,7 +1,8 @@
 import {
   USER_LOGIN_FAILURE,
   USER_LOGIN_REQUEST,
-  USER_LOGIN_SUCCESS
+  USER_LOGIN_SUCCESS,
+  USER_LOGOUT
 } from "../actionTypes/loginActionsTypes";
 
 const initState = {
@@ -29,6 +30,13 @@ export const loginReducer = (state = initState, { type, payload }) => {
         isLoading: false,
         user: {},
         isError: true
+      };
+    case USER_LOGOUT:
+      return {
+        ...state,
+        isLoading: false,
+        isErro: false,
+        user: {}
       };
     default:
       return state;

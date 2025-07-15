@@ -7,7 +7,8 @@ const userController = Router();
 
 userController.post("/register", async (req, res) => {
   try {
-    const { firstname, lastname, email, password, mobile } = req.body;
+    const { firstname, lastname, email, password } = req.body;
+    console.log(firstname, lastname, email, password);
 
     if (
       !firstname ||
@@ -17,9 +18,7 @@ userController.post("/register", async (req, res) => {
       !email ||
       email === "" ||
       !password ||
-      password === "" ||
-      !mobile ||
-      mobile === ""
+      password === ""
     ) {
       res.status(400).send({ msg: "Please fill all the fields correctly" });
     }
@@ -39,8 +38,7 @@ userController.post("/register", async (req, res) => {
             firstname,
             lastname,
             email,
-            password: hashedPassword,
-            mobile
+            password: hashedPassword
           };
 
           const newUser = new User(payload);
@@ -55,20 +53,23 @@ userController.post("/register", async (req, res) => {
 });
 
 userController.post("/login", async (req, res) => {
+  console.log("hello from login---------------------");
   try {
     const { email, password } = req.body;
 
     if (email && password && email !== "" && password !== "") {
       const user = await User.findOne({ email: email });
 
-      if (!user || user.length === 0)
+      // console.log(user);
+
+      if (!user) {
         res.status(401).send({ error: "Invalid email or password" });
-      else {
-        bcrypt.compare(password, hashed, async (error, result) => {
-          if (error)
+      } else {
+        bcrypt.compare(password, user?.password, async (error, result) => {
+          if (error) {
             res.status(401).send({ error: "Invalid email or password" });
-          else {
-            if (result) {
+          } else {
+            if (result === true) {
               const token = jwt.sign({ userId: user._id }, process.env.SECRET);
 
               res.status(200).send({
@@ -82,7 +83,9 @@ userController.post("/login", async (req, res) => {
                 },
                 token: token
               });
-            } else res.status(401).send({ error: "Invalid email or password" });
+            } else {
+              res.status(401).send({ error: "Invalid email or password" });
+            }
           }
         });
       }

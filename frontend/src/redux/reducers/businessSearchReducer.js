@@ -1,33 +1,33 @@
 import {
-  GET_ALL_BUSINESSES_FAILURE,
-  GET_ALL_BUSINESSES_REQUEST,
-  GET_ALL_BUSINESSES_SUCCESS
+  SEARCH_BUSINESS_FAILURE,
+  SEARCH_BUSINESS_REQUEST,
+  SEARCH_BUSINESS_SUCCESS
 } from "../actionTypes/businessActionTypes";
 
 const initState = {
   isLoading: false,
   isError: false,
-  allBusinesses: []
+  searchResult: []
 };
 
-export const businessReducer = (state = initState, { type, payload }) => {
+export const businessSearchReducer = (state = initState, { type, payload }) => {
   switch (type) {
-    case GET_ALL_BUSINESSES_REQUEST:
+    case SEARCH_BUSINESS_REQUEST:
       return {
         ...state,
         isLoading: true
       };
-    case GET_ALL_BUSINESSES_SUCCESS:
+    case SEARCH_BUSINESS_SUCCESS:
       return {
         ...state,
         isLoading: false,
-        allBusinesses: payload?.response
+        searchResult: payload?.response
       };
-    case GET_ALL_BUSINESSES_FAILURE:
+    case SEARCH_BUSINESS_FAILURE:
       return {
         ...state,
         isLoading: false,
-        allBusinesses: [],
+        searchResult: [],
         isError: true
       };
     default:

@@ -4,8 +4,13 @@ import { persistReducer, persistStore } from "redux-persist";
 import { loginReducer } from "./reducers/loginReducer";
 import storage from "redux-persist/lib/storage";
 import { businessReducer } from "./reducers/businessReducer";
+import { businessSearchReducer } from "./reducers/businessSearchReducer";
 
-const rootReducer = combineReducers({ loginReducer, businessReducer });
+const rootReducer = combineReducers({
+  loginReducer,
+  businessReducer,
+  businessSearchReducer
+});
 
 const persistConfig = {
   key: "root",
